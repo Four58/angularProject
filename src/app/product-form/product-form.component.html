@@ -1,0 +1,38 @@
+<form class="d-grid gap-3 pt-3 pb-3">
+  <h3>Add more products</h3>
+  <div class="form-group m-auto w-75">
+    <label for="title">Title</label>
+    <input
+      #inputTitle
+      type="text"
+      class="form-control"
+      id="title"
+      placeholder="Enter title"
+      value="{{ newTitle }}"
+      (input)="onInputTitle(inputTitle.value)"
+    />
+  </div>
+  <p *ngIf="!validTitle" class="text-danger m-auto">Please input the title</p>
+  <div class="form-group m-auto w-75">
+    <label for="description">Description</label>
+    <input
+      #inputDescription
+      type="text"
+      class="form-control"
+      id="description"
+      placeholder="Description"
+      value="{{ newDescription }}"
+      (input)="onInputDescription(inputDescription.value)"
+    />
+  </div>
+  <p *ngIf="!validDescription" class="text-danger m-auto">
+    Please input the description
+  </p>
+  <button
+    (click)="onAddProduct()"
+    type="button"
+    class="btn btn-primary m-auto w-25"
+  >
+    Add
+  </button>
+</form>
