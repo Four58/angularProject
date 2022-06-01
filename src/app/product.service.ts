@@ -7,12 +7,6 @@ import { todoLists } from './todo-modal/todo-modal.component';
   providedIn: 'root',
 })
 export class ProductService {
-  newProduct: Product = {
-    title: '',
-    id: 0,
-    description: '',
-  };
-
   productTitle: string = '';
   productDescription: string = '';
 
@@ -48,9 +42,8 @@ export class ProductService {
     return todoList;
   }
 
-  clearTodos(): Observable<string[]> {
-    const todoList = of([]);
-    return todoList;
+  clearTodos() {
+    todoLists.splice(0);
   }
 }
 
