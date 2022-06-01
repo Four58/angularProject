@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../product.service';
+
+export const todoLists: string[] = [];
 
 @Component({
   selector: 'app-todo-modal',
@@ -6,16 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todo-modal.component.scss'],
 })
 export class TodoModalComponent implements OnInit {
-  todoLists: string[] = [];
   newTodo = '';
   noInput: boolean = false;
+  todoLists: string[] = [];
 
-  constructor() {}
+  constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getTodo();
+  }
   addTodo() {
     if (this.newTodo != '') {
-      this.todoLists.push(this.newTodo);
+      this.productService.addTodos(this.newTodo);
       this.newTodo = '';
     } else {
       this.noInput = true;
@@ -23,11 +28,17 @@ export class TodoModalComponent implements OnInit {
   }
 
   clearTodo() {
-    this.todoLists = [];
+    this.productService.clearTodos();
   }
 
   onInputTodo(todo: string) {
     this.newTodo = todo;
     this.noInput = false;
+  }
+
+  getTodo() {
+    this.productService
+      .getTodos()
+      .subscribe((todoList) => (this.todoLists = todoList));
   }
 }
